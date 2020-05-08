@@ -1,0 +1,21 @@
+class Solution {
+    public boolean checkStraightLine(int[][] coordinates) {
+        
+        int[] start = coordinates[0];
+        int[] end = coordinates[coordinates.length - 1];
+        
+        double gSlope = slope(start, end);
+        
+        for(int i = 1; i < coordinates.length; i++) {
+            double slopePoints = slope(coordinates[i-1], coordinates[i]);
+            if(slopePoints != gSlope)
+                return false;
+        }
+        return true;
+    }
+    
+    public double slope(int[] start, int[] end) {
+        if ((start[0] - end[0]) == 0) return 0;
+        return Math.abs(Math.abs(start[1] - end[1])/Math.abs(start[0] - end[0]));
+    }
+}
