@@ -1,0 +1,32 @@
+class Solution {
+    public int findJudge(int N, int[][] trust) {
+        
+        HashMap<Integer, List<Integer>> graph = new HashMap<>();
+        
+        for(int i = 1; i <= N; i++)
+            graph.put(i, new ArrayList<>());
+        
+        for(int[]tr: trust) {
+            graph.get(tr[0]).add(tr[1]);
+        }
+        int tJud = 0;
+        for(int k: graph.keySet()) {
+            List l = graph.get(k);
+            if(l.size() == 0) {
+                tJud =  k;
+                break;
+            }
+        }
+        
+        for(int k: graph.keySet()) {
+            List l = graph.get(k);
+            if(k != tJud && !l.contains(tJud) ) {
+                return -1;
+                
+            }
+        }
+        
+        
+        return tJud;
+    }
+}
